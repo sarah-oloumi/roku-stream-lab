@@ -8,6 +8,11 @@ const root = resolve(import.meta.dirname, "..");
 const node = process.execPath;
 
 assert.equal(await validateFeed(), true, "feed should be valid");
+assert.ok(await stat(join(root, "AGENTS.md")), "AGENTS.md should exist");
+assert.ok(await stat(join(root, "CHANGELOG.md")), "CHANGELOG.md should exist");
+assert.ok(await stat(join(root, "LICENSE")), "LICENSE should exist");
+assert.ok(await stat(join(root, "VERSION")), "VERSION should exist");
+assert.ok(await stat(join(root, "package-lock.json")), "package-lock.json should exist");
 assert.ok(await stat(join(root, "bsconfig.json")), "bsconfig.json should exist");
 assert.ok(await stat(join(root, "src", "source", "main.bs")), "BrighterScript source should exist");
 

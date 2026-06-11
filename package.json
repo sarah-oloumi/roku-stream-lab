@@ -2,6 +2,7 @@
   "name": "roku-stream-lab",
   "version": "0.1.0",
   "description": "A local Roku BrightScript streaming app workbench powered by Apple container.",
+  "private": true,
   "type": "module",
   "bin": {
     "rokulab": "./scripts/rokulab.mjs"
@@ -18,7 +19,7 @@
     "test": "node tests/cli.test.mjs"
   },
   "devDependencies": {
-    "brighterscript": "^0.72.5"
+    "brighterscript": "0.72.5"
   },
   "engines": {
     "node": ">=20"

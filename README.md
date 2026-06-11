@@ -2,6 +2,8 @@
 
 Roku Stream Lab is a local workbench for building BrightScript and BrighterScript SceneGraph video streaming apps on a Mac with Apple `container`.
 
+Current release: `0.1.0`.
+
 It gives you an Android Studio-like loop for the parts Roku can safely support locally:
 
 - edit and inspect the Roku app package
@@ -100,6 +102,10 @@ node scripts/rokulab.mjs remote Back
 ## Project Layout
 
 ```text
+AGENTS.md                  instructions for AI coding agents
+CHANGELOG.md               release history
+LICENSE                    MIT license
+VERSION                    current release version
 container/Dockerfile       Apple container image
 content/feed.json          local Studio catalog source
 docs/PLAN.md               researched plan and constraints
