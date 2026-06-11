@@ -111,7 +111,6 @@ LICENSE                    MIT license
 VERSION                    current release version
 container/Dockerfile       Apple container image
 content/feed.json          local Studio catalog source
-docs/PLAN.md               researched plan and constraints
 docs/dependencies/         dependency policy notes
 bsconfig.json              BrighterScript compiler config
 src/                       canonical BrighterScript app source
