@@ -51,7 +51,7 @@ Then open `http://127.0.0.1:7070`.
 
 The Apple container mounts this repo at `/workspace`, so edits on your Mac are visible inside the workbench.
 
-The upstream Apple `container` source is pinned as a git submodule at `third_party/apple-container` for traceability and Renovate review. It does not replace the installed `container` CLI. See `docs/dependencies/apple-container.md`.
+The upstream Apple `container` source is pinned as a git submodule at `third_party/apple-container` for traceability and Renovate review. It does not replace the installed `container` CLI. See `docs/dependencies/apple-container.md` for the dependency model and `docs/dependencies/update-policy.md` for update rules.
 
 ## BrighterScript Workflow
 

@@ -28,6 +28,7 @@ Guidance for AI coding agents working in this repository.
 - Do not manually edit `package-lock.json`; regenerate it with npm.
 - Keep Renovate conservative: no automerge, dependency dashboard approval, and CI required.
 - Apple `container` submodule updates are tag-based through `.gitmodules` `branch = <tag>`; do not move it to `main`.
+- Dependency update rules live in `docs/dependencies/update-policy.md`.
 - Keep generated build output out of git. `dist/` is ignored.
 - Use ASCII in source/docs unless a file already has a reason not to.
 

@@ -11,6 +11,7 @@ This project follows semantic versioning.
 - Tightened README and Studio UI copy to make clear that Roku Stream Lab is an early local workbench, not a Roku OS emulator.
 - Clarified that Apple `container` is an optional runtime for the Node-based Studio, not proof that the current UI is running inside a container.
 - Removed repo-policy/file-existence assertions from unit tests so `npm test` focuses on behavior.
+- Moved Apple `container` Renovate/manual update rules into a general dependency update policy doc.
 
 ### Added
 
