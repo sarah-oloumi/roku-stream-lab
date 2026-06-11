@@ -67,6 +67,18 @@ The BrighterScript config lives at `bsconfig.json`. Builds stage compiled Bright
 
 The `roku-app/` folder is a plain BrightScript fallback snapshot so the repo can still package without installed dependencies. Once `brighterscript` is installed, `npm run package` prefers the BrighterScript build.
 
+## Runtime Direction
+
+The long-term target is a tested Roku compatibility runtime: BrightScript execution, SceneGraph node/render behavior, and documented Roku OS API shims such as device info, registry, file system, input, and ECP. This will be built in small tested slices, not as a single opaque emulator drop.
+
+Before changing runtime behavior, read:
+
+- `.codex/skills/unit-test-roku-runtime/SKILL.md`
+- `docs/research/roku-runtime.md`
+- `docs/testing/roku-unit-testing.md`
+
+Every behavior change must include unit tests. Roku-side BrightScript libraries should use Rooibos tests.
+
 ## Package A Roku App
 
 ```sh
@@ -115,6 +127,8 @@ VERSION                    current release version
 container/Dockerfile       Apple container image
 content/feed.json          local Studio catalog source
 docs/dependencies/         dependency policy notes
+docs/research/             runtime research snapshots
+docs/testing/              test principles and subagent review brief
 bsconfig.json              BrighterScript compiler config
 src/                       canonical BrighterScript app source
 roku-app/                  plain BrightScript fallback snapshot

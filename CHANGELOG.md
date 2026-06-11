@@ -11,6 +11,12 @@ This project follows semantic versioning.
 - Tightened README and Studio UI copy to make clear that Roku Stream Lab is an early local workbench, not a Roku OS emulator.
 - Clarified that Apple `container` is an optional runtime for the Node-based Studio, not proof that the current UI is running inside a container.
 
+### Added
+
+- Repo-local unit testing skill for Roku runtime work.
+- Roku runtime research snapshot.
+- Unit testing principles and subagent review brief for future BrightScript/SceneGraph compatibility work.
+
 ## [0.1.0] - 2026-06-11
 
 ### Added
