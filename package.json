@@ -16,9 +16,10 @@
     "package": "node scripts/rokulab.mjs package",
     "container-build": "node scripts/rokulab.mjs container-build",
     "container-run": "node scripts/rokulab.mjs container-run",
-    "test": "node tests/cli.test.mjs"
+    "test": "node tests/cli.test.mjs && node tests/brightscriptRunner.test.mjs"
   },
   "devDependencies": {
+    "@rokucommunity/brs": "0.47.4",
     "brighterscript": "0.72.5"
   },
   "engines": {

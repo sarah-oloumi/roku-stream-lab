@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { once } from "node:events";
 import zlib from "node:zlib";
+import { runBrightScriptFile } from "../src/runtime/brightscriptRunner.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const appDir = join(root, "roku-app");
@@ -24,6 +25,7 @@ const commands = {
   "build:bs": buildBrighterScript,
   "check:bs": checkBrighterScript,
   "watch:bs": watchBrighterScript,
+  "run-brs": runBrightScript,
   serve,
   deploy,
   remote,
@@ -100,6 +102,23 @@ export async function checkBrighterScript() {
 
 export async function watchBrighterScript() {
   runBsc(["--project", "bsconfig.json", "--watch"]);
+}
+
+export async function runBrightScript(args = []) {
+  const file = args[0];
+  if (!file) {
+    fail("Usage: rokulab run-brs <path-to-file.brs>");
+  }
+
+  const result = await runBrightScriptFile(file, {
+    cwd: process.cwd(),
+    projectRoot: root
+  });
+  if (result.stdout) process.stdout.write(result.stdout);
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.status !== "ok") {
+    process.exit(result.code ?? 1);
+  }
 }
 
 export async function serve(args = []) {
@@ -192,6 +211,7 @@ Usage:
   rokulab build:bs
   rokulab check:bs
   rokulab watch:bs
+  rokulab run-brs <path-to-file.brs>
   rokulab serve [--host 127.0.0.1] [--port 7070]
   rokulab package [--out dist/streamlab.zip] [--no-bsc]
   rokulab deploy [--target ip] [--password pass] [--zip dist/streamlab.zip]

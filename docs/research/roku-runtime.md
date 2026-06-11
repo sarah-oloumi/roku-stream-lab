@@ -5,7 +5,8 @@ This repo is moving from a local Studio preview toward a Roku compatibility runt
 ## Current Reality
 
 - The Studio at `http://127.0.0.1:7070` is a Node-served browser UI.
-- It does not interpret BrightScript.
+- The `run-brs` CLI command can execute standalone `.brs` language scripts through RokuCommunity BRS.
+- The Studio browser preview does not interpret BrightScript.
 - It does not execute SceneGraph components.
 - It does not emulate Roku OS.
 - Apple `container` is currently an optional way to run the Node server and packaging toolchain. It is not itself the emulator.

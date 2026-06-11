@@ -18,6 +18,7 @@ This project follows semantic versioning.
 - Repo-local unit testing skill for Roku runtime work.
 - Roku runtime research snapshot.
 - Unit testing principles and subagent review brief for future BrightScript/SceneGraph compatibility work.
+- Standalone `.brs` execution via `rokulab run-brs`, backed by RokuCommunity BRS when installed.
 
 ## [0.1.0] - 2026-06-11
 

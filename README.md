@@ -10,13 +10,14 @@ What works locally:
 
 - edit and inspect the Roku app package
 - write modern BrighterScript in `src/` and compile it to Roku-compatible BrightScript
+- run standalone `.brs` language scripts through RokuCommunity BRS
 - preview video catalog data in a TV-shaped browser workbench
 - test catalog focus movement with remote-style controls
 - validate feed shape and playback URLs
 - package a sideloadable Roku ZIP
 - deploy and send remote keypresses to a real Roku developer device
 
-Important: this does not emulate Roku OS, and the browser preview does not execute BrightScript. Real BrightScript execution, SceneGraph rendering, codecs, DRM, RAF ads, Roku Pay, and certification behavior still require an actual Roku device.
+Important: this does not emulate Roku OS, and the browser preview does not execute BrightScript. The local BrightScript runner is limited to standalone `.brs` language execution through RokuCommunity BRS; SceneGraph rendering, Roku OS APIs, codecs, DRM, RAF ads, Roku Pay, and certification behavior still require an actual Roku device.
 
 ## Requirements
 
@@ -24,6 +25,7 @@ Important: this does not emulate Roku OS, and the browser preview does not execu
 - Apple `container` installed and started
 - Node.js 20+ if running outside the container
 - BrighterScript via `npm install` when running outside the container
+- RokuCommunity BRS via `npm install` or the Apple container image for `run-brs`
 - A Roku device in developer mode for sideloading and true runtime testing
 
 ## Quick Start
@@ -67,9 +69,19 @@ The BrighterScript config lives at `bsconfig.json`. Builds stage compiled Bright
 
 The `roku-app/` folder is a plain BrightScript fallback snapshot so the repo can still package without installed dependencies. Once `brighterscript` is installed, `npm run package` prefers the BrighterScript build.
 
+## BrightScript Runner
+
+Standalone `.brs` files can be executed locally through RokuCommunity BRS:
+
+```sh
+node scripts/rokulab.mjs run-brs path/to/file.brs
+```
+
+This is a language runner only. It does not execute SceneGraph components or provide Roku OS API shims.
+
 ## Runtime Direction
 
-The long-term target is a tested Roku compatibility runtime: BrightScript execution, SceneGraph node/render behavior, and documented Roku OS API shims such as device info, registry, file system, input, and ECP. This will be built in small tested slices, not as a single opaque emulator drop.
+The long-term target is a tested Roku compatibility runtime: BrightScript execution, SceneGraph node/render behavior, and documented Roku OS API shims such as device info, registry, file system, input, and ECP. The first runtime slice is a standalone `.brs` runner through RokuCommunity BRS; broader compatibility will be built in small tested slices, not as a single opaque emulator drop.
 
 Before changing runtime behavior, read:
 
@@ -133,6 +145,7 @@ bsconfig.json              BrighterScript compiler config
 src/                       canonical BrighterScript app source
 roku-app/                  plain BrightScript fallback snapshot
 scripts/rokulab.mjs        CLI for package/deploy/container workflows
+src/runtime/               local runtime adapters such as standalone BrightScript execution
 studio/                    local browser workbench
 tests/                     zero-dependency verification
 third_party/apple-container pinned Apple container source submodule
