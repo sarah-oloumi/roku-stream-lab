@@ -4,6 +4,13 @@ All notable changes to Roku Stream Lab are documented here.
 
 This project follows semantic versioning.
 
+## [Unreleased]
+
+### Changed
+
+- Tightened README and Studio UI copy to make clear that Roku Stream Lab is an early local workbench, not a Roku OS emulator.
+- Clarified that Apple `container` is an optional runtime for the Node-based Studio, not proof that the current UI is running inside a container.
+
 ## [0.1.0] - 2026-06-11
 
 ### Added

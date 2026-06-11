@@ -1,21 +1,22 @@
 # Roku Stream Lab
 
-Roku Stream Lab is a local workbench for building BrightScript and BrighterScript SceneGraph video streaming apps on a Mac with Apple `container`.
+Roku Stream Lab is an early local Studio for Roku video streaming apps. It helps you inspect BrightScript and BrighterScript source, preview catalog data, package a sideloadable Roku app, and deploy to a real Roku device.
 
 Current release: `0.1.0`.
 
-It gives you an Android Studio-like loop for the parts Roku can safely support locally:
+It can run directly with Node.js, or inside Apple `container` when the Apple `container` CLI is installed and started.
+
+What works locally:
 
 - edit and inspect the Roku app package
 - write modern BrighterScript in `src/` and compile it to Roku-compatible BrightScript
-- preview the video catalog in a TV-shaped browser simulator
-- test focus movement with remote-style controls
+- preview video catalog data in a TV-shaped browser workbench
+- test catalog focus movement with remote-style controls
 - validate feed shape and playback URLs
 - package a sideloadable Roku ZIP
 - deploy and send remote keypresses to a real Roku developer device
-- run the workbench inside Apple `container`
 
-Important: this does not emulate Roku OS. Real BrightScript execution, SceneGraph rendering, codecs, DRM, RAF ads, Roku Pay, and certification behavior still require an actual Roku device.
+Important: this does not emulate Roku OS, and the browser preview does not execute BrightScript. Real BrightScript execution, SceneGraph rendering, codecs, DRM, RAF ads, Roku Pay, and certification behavior still require an actual Roku device.
 
 ## Requirements
 
@@ -38,6 +39,8 @@ Open `http://127.0.0.1:7070`.
 
 ## Apple Container Workflow
 
+Apple `container` is optional for running the local Studio. It gives you a reproducible Linux toolchain for the Node server and packaging flow; it does not make Roku OS run locally.
+
 ```sh
 container system start
 npm run container-build
@@ -46,7 +49,7 @@ npm run container-run
 
 Then open `http://127.0.0.1:7070`.
 
-The container mounts this repo at `/workspace`, so edits on your Mac are visible inside the workbench.
+The Apple container mounts this repo at `/workspace`, so edits on your Mac are visible inside the workbench.
 
 The upstream Apple `container` source is pinned as a git submodule at `third_party/apple-container` for traceability and Renovate review. It does not replace the installed `container` CLI. See `docs/dependencies/apple-container.md`.
 

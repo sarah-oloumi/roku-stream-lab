@@ -71,7 +71,7 @@ function renderPreview() {
 function bindControls() {
   document.querySelector("#runDoctor").addEventListener("click", async () => {
     const result = await getJson("/api/doctor");
-    statusEl.textContent = result.feed ? "Doctor passed: feed is valid" : "Doctor found feed issues";
+    statusEl.textContent = result.feed ? "Doctor passed: feed is valid; runtime test still needs a Roku" : "Doctor found feed issues";
   });
 
   document.querySelector("#packageApp").addEventListener("click", async () => {

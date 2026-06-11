@@ -29,7 +29,8 @@ export function createStudioServer({ root }) {
         return json(res, {
           feed: await validateFeed(),
           notes: [
-            "Local preview validates catalog shape and stream URLs.",
+            "Local Studio validates catalog shape and stream URLs.",
+            "The browser preview does not run BrightScript or emulate Roku OS.",
             "Real BrightScript execution still requires a Roku device."
           ]
         });
