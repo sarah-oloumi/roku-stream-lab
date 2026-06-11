@@ -1,0 +1,21 @@
+namespace StreamLab
+    function buildGridContent(items as Object) as Object
+        root = CreateObject("roSGNode", "ContentNode")
+        for each item in items
+            node = root.CreateChild("ContentNode")
+            node.title = item.title
+            node.description = item.description
+            node.url = item.streamUrl
+            node.streamFormat = item.streamFormat
+        end for
+        return root
+    end function
+
+    function buildVideoContent(item as Object) as Object
+        videoContent = CreateObject("roSGNode", "ContentNode")
+        videoContent.title = item.title
+        videoContent.url = item.url
+        videoContent.streamFormat = item.streamFormat
+        return videoContent
+    end function
+end namespace

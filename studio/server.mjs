@@ -77,8 +77,9 @@ function safeJoin(base, requested) {
 }
 
 async function listInterestingFiles(projectRoot) {
-  const roots = ["roku-app", "content", "docs", "container", "scripts"];
+  const roots = ["src", "roku-app", "content", "docs", "container", "scripts"];
   const files = [];
+  files.push("bsconfig.json", "package.json");
   for (const folder of roots) {
     files.push(...await walk(join(projectRoot, folder), projectRoot));
   }

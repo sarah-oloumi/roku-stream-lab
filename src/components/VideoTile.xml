@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="VideoTile" extends="Group">
+  <interface>
+    <field id="itemContent" type="node" onChange="onItemContentChanged" />
+  </interface>
+  <children>
+    <Rectangle id="poster" width="340" height="132" color="0x263349ff" />
+    <Rectangle translation="[0,132]" width="340" height="74" color="0x171c23ff" />
+    <Label id="title" translation="[14,142]" width="312" height="28" font="font:MediumBoldSystemFont" color="0xffffffff" />
+    <Label id="description" translation="[14,172]" width="312" height="24" font="font:SmallSystemFont" color="0xaeb9c8ff" />
+  </children>
+</component>

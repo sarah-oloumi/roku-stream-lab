@@ -11,13 +11,19 @@ import zlib from "node:zlib";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const appDir = join(root, "roku-app");
+const srcDir = join(root, "src");
 const distDir = join(root, "dist");
+const stagingDir = join(distDir, "staging");
 const defaultZip = join(distDir, "streamlab.zip");
 const feedPath = join(root, "content", "feed.json");
+const bsconfigPath = join(root, "bsconfig.json");
 
 const commands = {
   doctor,
   package: packageApp,
+  "build:bs": buildBrighterScript,
+  "check:bs": checkBrighterScript,
+  "watch:bs": watchBrighterScript,
   serve,
   deploy,
   remote,
@@ -40,7 +46,12 @@ export async function doctor() {
   checks.push(check("Node.js >= 20", Number(process.versions.node.split(".")[0]) >= 20));
   checks.push(check("Roku manifest", await exists(join(appDir, "manifest"))));
   checks.push(check("SceneGraph entry", await exists(join(appDir, "source", "main.brs"))));
+  checks.push(check("BrighterScript config", await exists(bsconfigPath)));
+  checks.push(check("BrighterScript source", await exists(join(srcDir, "source", "main.bs"))));
   checks.push(check("Content feed", await validateFeed()));
+
+  const bsc = findBsc();
+  checks.push(check("BrighterScript compiler", Boolean(bsc), "Optional locally until you run npm install; container image installs bsc globally."));
 
   const container = spawnSync("container", ["--version"], { encoding: "utf8" });
   checks.push(check("Apple container CLI", container.status === 0, "Install apple/container and run container system start."));
@@ -56,12 +67,20 @@ export async function doctor() {
 
 export async function packageApp(args = []) {
   const output = resolve(valueAfter(args, "--out") ?? defaultZip);
+  const noBsc = args.includes("--no-bsc");
   await mkdir(dirname(output), { recursive: true });
-  const files = await listFiles(appDir);
+  if (!noBsc && await buildWithBsc(output)) {
+    const hash = createHash("sha256").update(await readFile(output)).digest("hex").slice(0, 12);
+    console.log(`Packaged with BrighterScript -> ${relative(root, output)} (${hash})`);
+    return;
+  }
+
+  const sourceDir = await exists(stagingDir) ? stagingDir : appDir;
+  const files = await listFiles(sourceDir);
   const entries = [];
 
   for (const absolute of files) {
-    const local = slash(relative(appDir, absolute));
+    const local = slash(relative(sourceDir, absolute));
     const data = await readFile(absolute);
     entries.push({ name: local, data });
   }
@@ -69,6 +88,18 @@ export async function packageApp(args = []) {
   await writeZip(output, entries);
   const hash = createHash("sha256").update(await readFile(output)).digest("hex").slice(0, 12);
   console.log(`Packaged ${entries.length} files -> ${relative(root, output)} (${hash})`);
+}
+
+export async function buildBrighterScript() {
+  runBsc(["--project", "bsconfig.json"]);
+}
+
+export async function checkBrighterScript() {
+  runBsc(["--project", "bsconfig.json", "--create-package", "false", "--copy-to-staging", "false"]);
+}
+
+export async function watchBrighterScript() {
+  runBsc(["--project", "bsconfig.json", "--watch"]);
 }
 
 export async function serve(args = []) {
@@ -158,8 +189,11 @@ export function help() {
 
 Usage:
   rokulab doctor
+  rokulab build:bs
+  rokulab check:bs
+  rokulab watch:bs
   rokulab serve [--host 127.0.0.1] [--port 7070]
-  rokulab package [--out dist/streamlab.zip]
+  rokulab package [--out dist/streamlab.zip] [--no-bsc]
   rokulab deploy [--target ip] [--password pass] [--zip dist/streamlab.zip]
   rokulab remote <Home|Up|Down|Left|Right|Select|Back|Play> [--target ip]
   rokulab container-build
@@ -216,6 +250,44 @@ async function listFiles(dir) {
 function valueAfter(args, flag) {
   const index = args.indexOf(flag);
   return index >= 0 ? args[index + 1] : undefined;
+}
+
+async function buildWithBsc(output) {
+  const bsc = findBsc();
+  if (!bsc) {
+    console.log("BrighterScript compiler not found; packaging plain BrightScript snapshot from roku-app/.");
+    return false;
+  }
+  const result = spawnSync(bsc, ["--project", "bsconfig.json", "--outFile", output], {
+    cwd: root,
+    encoding: "utf8",
+    stdio: "pipe"
+  });
+  if (result.stdout) process.stdout.write(result.stdout);
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.status !== 0) {
+    fail("BrighterScript build failed.");
+  }
+  return true;
+}
+
+function runBsc(args) {
+  const bsc = findBsc();
+  if (!bsc) {
+    fail("BrighterScript compiler not found. Run npm install, install brighterscript globally, or use the Apple container image.");
+  }
+  run(bsc, args, root);
+}
+
+function findBsc() {
+  const local = join(root, "node_modules", ".bin", process.platform === "win32" ? "bsc.cmd" : "bsc");
+  if (spawnSync(local, ["--version"], { encoding: "utf8" }).status === 0) {
+    return local;
+  }
+  if (spawnSync("bsc", ["--version"], { encoding: "utf8" }).status === 0) {
+    return "bsc";
+  }
+  return undefined;
 }
 
 function run(command, args, cwd) {

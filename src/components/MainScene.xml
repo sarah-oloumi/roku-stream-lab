@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="MainScene" extends="Scene">
+  <children>
+    <Rectangle id="background" width="1280" height="720" color="0x111419ff" />
+    <Label id="title" translation="[72,48]" width="920" height="44" font="font:LargeBoldSystemFont" color="0xf4f7fbff" text="Stream Lab Cinema" />
+    <Label id="subtitle" translation="[72,96]" width="900" height="32" font="font:MediumSystemFont" color="0xaeb9c8ff" text="Video streaming catalog" />
+    <MarkupGrid
+      id="grid"
+      translation="[72,156]"
+      itemComponentName="VideoTile"
+      numColumns="3"
+      numRows="2"
+      itemSize="[340,206]"
+      itemSpacing="[24,24]"
+      drawFocusFeedback="true" />
+    <Video id="player" visible="false" width="1280" height="720" />
+  </children>
+</component>

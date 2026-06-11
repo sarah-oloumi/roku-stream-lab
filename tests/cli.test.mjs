@@ -8,10 +8,13 @@ const root = resolve(import.meta.dirname, "..");
 const node = process.execPath;
 
 assert.equal(await validateFeed(), true, "feed should be valid");
+assert.ok(await stat(join(root, "bsconfig.json")), "bsconfig.json should exist");
+assert.ok(await stat(join(root, "src", "source", "main.bs")), "BrighterScript source should exist");
 
 const help = spawnSync(node, ["scripts/rokulab.mjs", "help"], { cwd: root, encoding: "utf8" });
 assert.equal(help.status, 0);
 assert.match(help.stdout, /Roku Stream Lab/);
+assert.match(help.stdout, /check:bs/);
 
 const packaged = spawnSync(node, ["scripts/rokulab.mjs", "package"], { cwd: root, encoding: "utf8" });
 assert.equal(packaged.status, 0, packaged.stderr);

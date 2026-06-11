@@ -7,12 +7,18 @@
     "rokulab": "./scripts/rokulab.mjs"
   },
   "scripts": {
+    "build:bs": "bsc --project bsconfig.json",
+    "check:bs": "bsc --project bsconfig.json --create-package false --copy-to-staging false",
+    "watch:bs": "bsc --project bsconfig.json --watch",
     "doctor": "node scripts/rokulab.mjs doctor",
     "serve": "node scripts/rokulab.mjs serve",
     "package": "node scripts/rokulab.mjs package",
     "container-build": "node scripts/rokulab.mjs container-build",
     "container-run": "node scripts/rokulab.mjs container-run",
     "test": "node tests/cli.test.mjs"
+  },
+  "devDependencies": {
+    "brighterscript": "^0.72.5"
   },
   "engines": {
     "node": ">=20"

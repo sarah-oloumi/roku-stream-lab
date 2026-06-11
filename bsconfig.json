@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/rokucommunity/brighterscript/master/bsconfig.schema.json",
+  "rootDir": "src",
+  "files": [
+    "manifest",
+    "source/**/*",
+    "components/**/*",
+    "content/**/*",
+    "images/**/*"
+  ],
+  "stagingDir": "dist/staging",
+  "retainStagingDir": true,
+  "outFile": "dist/streamlab.zip",
+  "sourceMap": true,
+  "autoImportComponentScript": true,
+  "diagnosticLevel": "warn"
+}

@@ -1,10 +1,11 @@
 # Roku Stream Lab
 
-Roku Stream Lab is a local workbench for building BrightScript/SceneGraph video streaming apps on a Mac with Apple `container`.
+Roku Stream Lab is a local workbench for building BrightScript and BrighterScript SceneGraph video streaming apps on a Mac with Apple `container`.
 
 It gives you an Android Studio-like loop for the parts Roku can safely support locally:
 
 - edit and inspect the Roku app package
+- write modern BrighterScript in `src/` and compile it to Roku-compatible BrightScript
 - preview the video catalog in a TV-shaped browser simulator
 - test focus movement with remote-style controls
 - validate feed shape and playback URLs
@@ -19,12 +20,14 @@ Important: this does not emulate Roku OS. Real BrightScript execution, SceneGrap
 - macOS 26 or newer on Apple silicon for Apple `container`
 - Apple `container` installed and started
 - Node.js 20+ if running outside the container
+- BrighterScript via `npm install` when running outside the container
 - A Roku device in developer mode for sideloading and true runtime testing
 
 ## Quick Start
 
 ```sh
 cp .env.example .env
+npm install
 npm run doctor
 npm run serve
 ```
@@ -42,6 +45,20 @@ npm run container-run
 Then open `http://127.0.0.1:7070`.
 
 The container mounts this repo at `/workspace`, so edits on your Mac are visible inside the workbench.
+
+## BrighterScript Workflow
+
+`src/` is the canonical modern source tree. It supports `.bs`, imports, namespaces, source maps, and compiler diagnostics through RokuCommunity BrighterScript.
+
+```sh
+npm run check:bs
+npm run build:bs
+npm run watch:bs
+```
+
+The BrighterScript config lives at `bsconfig.json`. Builds stage compiled BrightScript into `dist/staging` and write the sideloadable app to `dist/streamlab.zip`.
+
+The `roku-app/` folder is a plain BrightScript fallback snapshot so the repo can still package without installed dependencies. Once `brighterscript` is installed, `npm run package` prefers the BrighterScript build.
 
 ## Package A Roku App
 
@@ -86,7 +103,9 @@ node scripts/rokulab.mjs remote Back
 container/Dockerfile       Apple container image
 content/feed.json          local Studio catalog source
 docs/PLAN.md               researched plan and constraints
-roku-app/                  sideloadable BrightScript app
+bsconfig.json              BrighterScript compiler config
+src/                       canonical BrighterScript app source
+roku-app/                  plain BrightScript fallback snapshot
 scripts/rokulab.mjs        CLI for package/deploy/container workflows
 studio/                    local browser workbench
 tests/                     zero-dependency verification
@@ -94,7 +113,6 @@ tests/                     zero-dependency verification
 
 ## Next Milestones
 
-- live BrightScript diagnostics through `brighterscript`
 - Roku debug protocol viewer
 - ECP device discovery
 - Roku WebDriver integration for physical-device automation
