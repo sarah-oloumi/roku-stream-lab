@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Roku Stream Lab</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="mark">R</div>
+          <div>
+            <h1>Roku Stream Lab</h1>
+            <p>BrightScript streaming workbench</p>
+          </div>
+        </div>
+        <nav id="files" class="files"></nav>
+      </aside>
+
+      <main class="workspace">
+        <header class="toolbar">
+          <button id="runDoctor" type="button">Doctor</button>
+          <button id="packageApp" type="button">Package</button>
+          <span id="status">Ready</span>
+        </header>
+
+        <section class="panes">
+          <article class="editor">
+            <div class="panel-title">
+              <span id="fileTitle">Select a file</span>
+              <span id="fileMeta"></span>
+            </div>
+            <pre id="code"></pre>
+          </article>
+
+          <article class="simulator">
+            <div class="tv">
+              <div class="topline">
+                <span>Local TV Preview</span>
+                <span id="clock"></span>
+              </div>
+              <div id="screen" class="screen" tabindex="0"></div>
+              <video id="player" controls playsinline></video>
+            </div>
+            <div class="remote">
+              <button data-key="up">Up</button>
+              <div>
+                <button data-key="left">Left</button>
+                <button data-key="select">Select</button>
+                <button data-key="right">Right</button>
+              </div>
+              <button data-key="down">Down</button>
+              <button data-key="back">Back</button>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "title": "Stream Lab Cinema",
+  "description": "A small video catalog for testing Roku streaming layouts, focus movement, and playback URLs.",
+  "items": [
+    {
+      "id": "bbb-hls",
+      "title": "Big Buck Bunny",
+      "description": "Public adaptive HLS stream for playback smoke tests.",
+      "streamFormat": "hls",
+      "streamUrl": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+    },
+    {
+      "id": "sintel-hls",
+      "title": "Sintel Trailer",
+      "description": "Short public HLS stream suitable for quick iteration.",
+      "streamFormat": "hls",
+      "streamUrl": "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+    },
+    {
+      "id": "tears-mp4",
+      "title": "Tears of Steel",
+      "description": "MP4 fallback item for simple browser and Roku playback checks.",
+      "streamFormat": "mp4",
+      "streamUrl": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
+    },
+    {
+      "id": "bbb-mp4",
+      "title": "Bunny MP4",
+      "description": "Direct MP4 stream for baseline network and codec testing.",
+      "streamFormat": "mp4",
+      "streamUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    },
+    {
+      "id": "elephants",
+      "title": "Elephants Dream",
+      "description": "Sample on-demand title with a long-form stream URL.",
+      "streamFormat": "mp4",
+      "streamUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+    },
+    {
+      "id": "for-bigger-fun",
+      "title": "For Bigger Fun",
+      "description": "Short streaming test clip for focus and playback loops.",
+      "streamFormat": "mp4",
+      "streamUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+    }
+  ]
+}
