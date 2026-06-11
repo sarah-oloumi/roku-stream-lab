@@ -7,6 +7,7 @@ Use this guide for all runtime and emulator work in this repository.
 - Tests should improve developer speed and confidence.
 - Small tests should be fast, deterministic, and easy to run frequently.
 - Write tests against public behavior, not implementation details.
+- Do not count file-existence, doc-presence, or repo-policy checks as unit tests.
 - Prefer state/output assertions over interaction assertions.
 - Test behaviors, not one test per method.
 - Tests should be complete enough to understand the important inputs and concise enough to hide irrelevant setup.
