@@ -48,6 +48,8 @@ Then open `http://127.0.0.1:7070`.
 
 The container mounts this repo at `/workspace`, so edits on your Mac are visible inside the workbench.
 
+The upstream Apple `container` source is pinned as a git submodule at `third_party/apple-container` for traceability and Renovate review. It does not replace the installed `container` CLI. See `docs/dependencies/apple-container.md`.
+
 ## BrighterScript Workflow
 
 `src/` is the canonical modern source tree. It supports `.bs`, imports, namespaces, source maps, and compiler diagnostics through RokuCommunity BrighterScript.
@@ -102,6 +104,7 @@ node scripts/rokulab.mjs remote Back
 ## Project Layout
 
 ```text
+.github/workflows/ci.yml     CI using npm ci, BrighterScript checks, tests, and audit gate
 AGENTS.md                  instructions for AI coding agents
 CHANGELOG.md               release history
 LICENSE                    MIT license
@@ -109,12 +112,15 @@ VERSION                    current release version
 container/Dockerfile       Apple container image
 content/feed.json          local Studio catalog source
 docs/PLAN.md               researched plan and constraints
+docs/dependencies/         dependency policy notes
 bsconfig.json              BrighterScript compiler config
 src/                       canonical BrighterScript app source
 roku-app/                  plain BrightScript fallback snapshot
 scripts/rokulab.mjs        CLI for package/deploy/container workflows
 studio/                    local browser workbench
 tests/                     zero-dependency verification
+third_party/apple-container pinned Apple container source submodule
+renovate.json              conservative dependency automation
 ```
 
 ## Next Milestones

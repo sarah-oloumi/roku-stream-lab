@@ -1,0 +1,87 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "enabledManagers": [
+    "npm",
+    "github-actions",
+    "dockerfile",
+    "git-submodules"
+  ],
+  "timezone": "America/Toronto",
+  "schedule": [
+    "before 6am on monday"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "assignees": [
+    "saraholoumi"
+  ],
+  "dependencyDashboardApproval": true,
+  "minimumReleaseAge": "7 days",
+  "rangeStrategy": "pin",
+  "separateMajorMinor": true,
+  "rebaseWhen": "conflicted",
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 1,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 6am on monday"
+    ],
+    "automerge": false
+  },
+  "npm": {
+    "postUpdateOptions": [
+      "npmDedupe"
+    ]
+  },
+  "git-submodules": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ],
+      "groupName": "npm patch and minor dependencies",
+      "automerge": false
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "dependencyDashboardApproval": true,
+      "labels": [
+        "dependencies",
+        "major-update"
+      ],
+      "automerge": false
+    },
+    {
+      "matchManagers": [
+        "git-submodules"
+      ],
+      "groupName": "apple container submodule",
+      "dependencyDashboardApproval": true,
+      "labels": [
+        "dependencies",
+        "apple-container"
+      ],
+      "automerge": false,
+      "minimumReleaseAge": "14 days"
+    }
+  ]
+}

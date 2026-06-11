@@ -1,0 +1,4 @@
+[submodule "third_party/apple-container"]
+	path = third_party/apple-container
+	url = https://github.com/apple/container.git
+	branch = 1.0.0

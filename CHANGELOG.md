@@ -14,4 +14,8 @@ This project follows semantic versioning.
 - Roku SceneGraph sample channel with catalog loading, grid selection, and `Video` playback.
 - `rokulab` CLI for doctor checks, serving the Studio, packaging, deploy, remote keypresses, and Apple `container` wrappers.
 - Apple `container` image with Node.js, `zip`, `curl`, and BrighterScript installed.
+- Pinned Apple `container` source as a git submodule under `third_party/apple-container`.
+- Conservative Renovate configuration for npm, GitHub Actions, Dockerfile, and git submodule updates.
+- GitHub Actions CI using `npm ci`, BrighterScript validation, tests, and a high/critical npm audit gate.
+- Apple `container` dependency policy documentation.
 - Initial tests for feed validation, CLI help, packaging, and BrighterScript project presence.

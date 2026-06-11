@@ -13,6 +13,10 @@ assert.ok(await stat(join(root, "CHANGELOG.md")), "CHANGELOG.md should exist");
 assert.ok(await stat(join(root, "LICENSE")), "LICENSE should exist");
 assert.ok(await stat(join(root, "VERSION")), "VERSION should exist");
 assert.ok(await stat(join(root, "package-lock.json")), "package-lock.json should exist");
+assert.ok(await stat(join(root, ".gitmodules")), ".gitmodules should exist");
+assert.ok(await stat(join(root, ".github", "workflows", "ci.yml")), "CI workflow should exist");
+assert.ok(await stat(join(root, "renovate.json")), "renovate.json should exist");
+assert.ok(await stat(join(root, "docs", "dependencies", "apple-container.md")), "Apple container dependency docs should exist");
 assert.ok(await stat(join(root, "bsconfig.json")), "bsconfig.json should exist");
 assert.ok(await stat(join(root, "src", "source", "main.bs")), "BrighterScript source should exist");
 
