@@ -34,11 +34,14 @@ Build a compatibility runtime in layers:
 
 - `src/runtime/brightscriptRunner.mjs` runs standalone `.brs` files through RokuCommunity BRS.
 - `src/runtime/rokuDeviceInfo.mjs` defines a deterministic, partial `roDeviceInfo` host profile for local runtime work. It supports `GetModel`, `GetModelType`, `GetFriendlyName`, `GetDeviceUniqueId`, `GetOSVersion`, `GetVersion`, and `IsRIDADisabled`.
+- `src/runtime/rokuRuntime.mjs` defines the first tiny host-side `CreateObject` registry boundary. It currently supports only `roDeviceInfo`, performs case-insensitive lookup for that component name, preserves canonical component names in metadata, and passes runtime `deviceInfoProfile` overrides through to the `roDeviceInfo` factory.
+- The registry is intentionally host-runtime only in this slice. It does not inject `CreateObject` into BRS and does not load or emulate SceneGraph components.
 - The default device profile is intentionally synthetic and stable. It is meant for repeatable local tests and user-selectable emulator profiles, not for impersonating a physical Roku model.
 - `GetOSVersion()` returns an object with `major`, `minor`, `revision`, and `build` string fields. `GetVersion()` is kept as the deprecated legacy string shape because older apps may still call it.
 - `GetDeviceUniqueId()` returns `000000000000` by default, matching the modern deprecated behavior instead of inventing a persistent device identifier.
 - Device profile overrides are explicit and limited to the documented profile fields: `model`, `modelType`, `friendlyName`, `deviceUniqueId`, `osVersion`, `version`, and `isRIDADisabled`.
 - Unsupported `ifDeviceInfo` methods remain unsupported in this slice. Add each new method with a documented contract and focused unit coverage.
+- Unsupported registry components return `undefined` from `createObject(componentName)` and throw a precise `RangeError` from `requireObject(componentName)`. Unknown names should not be approximated to nearby Roku components.
 
 ## Public API Areas To Model First
 
