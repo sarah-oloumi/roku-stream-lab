@@ -4,6 +4,15 @@ Goal: build Roku Stream Lab into a local Roku development runtime that can execu
 
 This is a roadmap, not a claim that the repo already emulates Roku OS. Each story must land with meaningful unit tests in the same change. Stories that add Roku-side BrightScript libraries should also add Rooibos coverage.
 
+Supporting docs:
+
+- `docs/compatibility/roku-api-matrix.md` tracks current and planned Roku API support.
+- `docs/risks.md` tracks emulator risks and mitigations.
+- `docs/adr/` records long-lived architecture decisions.
+- `docs/fixtures/README.md` defines the fixture strategy.
+- `docs/glossary.md` defines project terminology.
+- `docs/releases/roadmap.md` maps milestone progress to release themes.
+
 ## Definition Of Done
 
 - A developer can run a Roku video-streaming SceneGraph app locally on a Mac.

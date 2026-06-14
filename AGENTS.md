@@ -12,8 +12,10 @@ Guidance for AI coding agents working in this repository.
 - `scripts/rokulab.mjs` is the CLI entrypoint and should stay dependency-light.
 - `third_party/apple-container` is a git submodule pinned to the upstream Apple `container` source for traceability; the installed `container` CLI is still a system prerequisite.
 - `.codex/skills/unit-test-roku-runtime/SKILL.md` is the repo-local skill for runtime test discipline.
+- `docs/compatibility/roku-api-matrix.md` is the living API support matrix and must change with runtime API support.
 - `docs/research/roku-runtime.md` records the current Roku runtime/emulation research snapshot.
 - `docs/milestones/roku-emulator-mvp.md` is the ordered milestone/epic/story roadmap for the emulator effort.
+- `docs/risks.md`, `docs/adr/`, `docs/fixtures/`, `docs/glossary.md`, and `docs/releases/roadmap.md` keep emulator planning decisions discoverable.
 - `docs/testing/roku-unit-testing.md` records the unit testing principles and subagent review brief.
 
 ## Development Rules
