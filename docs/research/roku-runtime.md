@@ -30,6 +30,16 @@ Build a compatibility runtime in layers:
 - RokuCommunity BRS is an off-Roku BrightScript interpreter. It is a possible foundation for language execution, but it does not emulate Roku UI, Roku Store, or content playback.
 - RokuCommunity Rooibos is the intended test framework for Roku-side BrightScript unit tests in this project.
 
+## Current Runtime Slices
+
+- `src/runtime/brightscriptRunner.mjs` runs standalone `.brs` files through RokuCommunity BRS.
+- `src/runtime/rokuDeviceInfo.mjs` defines a deterministic, partial `roDeviceInfo` host profile for local runtime work. It supports `GetModel`, `GetModelType`, `GetFriendlyName`, `GetDeviceUniqueId`, `GetOSVersion`, `GetVersion`, and `IsRIDADisabled`.
+- The default device profile is intentionally synthetic and stable. It is meant for repeatable local tests and user-selectable emulator profiles, not for impersonating a physical Roku model.
+- `GetOSVersion()` returns an object with `major`, `minor`, `revision`, and `build` string fields. `GetVersion()` is kept as the deprecated legacy string shape because older apps may still call it.
+- `GetDeviceUniqueId()` returns `000000000000` by default, matching the modern deprecated behavior instead of inventing a persistent device identifier.
+- Device profile overrides are explicit and limited to the documented profile fields: `model`, `modelType`, `friendlyName`, `deviceUniqueId`, `osVersion`, `version`, and `isRIDADisabled`.
+- Unsupported `ifDeviceInfo` methods remain unsupported in this slice. Add each new method with a documented contract and focused unit coverage.
+
 ## Public API Areas To Model First
 
 - `CreateObject`
